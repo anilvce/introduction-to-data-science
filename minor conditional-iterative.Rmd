@@ -1,0 +1,475 @@
+---
+title: "CONDITIONALS, CONTROL FLOW and ITERATIVE"
+output:
+  html_document:
+    df_print: paged
+---
+
+Sum of numbers
+
+```{r}
+# Install the package if you haven't already
+#install.packages("remotes")
+#remotes::install_github("mkearney/rmd2jupyter")
+#library(rmd2jupyter)
+#rmd2jupyter("minor.Rmd") #,output_file="m.ipynb")
+sum=0
+a=c(1,3,5,10,7)
+for( num in a){
+  sum=sum+num
+}
+print(sum)
+```
+
+Maximum of numbers
+
+```{r}
+max=a[1]
+print(a)
+for (num in a){
+ # print(num)
+  if ( max <= num ) {
+    max=num
+  }
+}
+print(max)
+print(max(a))
+```
+
+```{r}
+# List of strike rates
+b <- list(100, 123, 34, 99)
+good<-c()
+bad<-c()
+if(b[1]>100){
+  good<-c(good,1)
+} else{
+  bad<-c(bad,1)
+}
+
+
+if(b[2]>100){
+  good<-c(good,2)
+} else{
+  bad<-c(bad,2)
+}
+
+i<-4
+if(b[i]>100){
+  good<-c(good,i)
+} else{
+  bad<-c(bad,i)
+}
+
+# Convert list to numeric vector for easier processing
+strike_rates <- unlist(b)
+
+# Categorize using ifelse
+categories <- ifelse(strike_rates > 100, "good", "bad")
+
+# Display results
+data.frame(StrikeRate = strike_rates, Category = categories)
+
+```
+
+# 4. CONDITIONALS AND CONTROL FLOW
+
+## Relational operators
+
+```{r}
+TRUE==T
+#TRUE=TRUE  results in error
+TRUE==TRUE
+```
+
+```{r}
+'HELLO'=="GoodBye"
+#3===2
+TRUE!=T
+TRUE!=F
+"hello"!="GoodBye"
+```
+
+```{r}
+3<5
+3>5
+"Hello">"Goodbye"
+T<F
+```
+
+```{r}
+"Hello"<"hello"
+5>=3
+3>=3
+```
+
+## Relational operators and vectors
+
+```{r}
+linkedin<-c(16,9,13,5,2,17,14)
+linkedin>10
+facebook<-c(17,7,5,16,8,13,14)
+facebook
+
+facebook<=linkedin
+```
+
+## Logical operators
+
+### AND operator
+
+```{r}
+TRUE & TRUE
+TRUE & FALSE
+FALSE & TRUE
+FALSE & FALSE
+
+```
+
+```{r}
+# 
+x<-12
+x>5 & x<15
+
+x<-17
+x>5 & x<15
+```
+
+### OR operator
+
+```{r}
+TRUE | TRUE
+TRUE | FALSE
+FALSE | TRUE
+FALSE | FALSE
+
+```
+
+```{r}
+y<-4
+y<5 | y>15
+y<-14
+y<5 | y>15
+```
+
+### NOT operator
+
+```{r}
+!TRUE
+
+!FALSE
+
+!(x<5)
+```
+
+```{r}
+is.numeric(5)
+!is.numeric(5)
+is.numeric("hello")
+!is.numeric("hello")
+
+```
+
+## Logical operators and vectors
+
+```{r}
+a=c(TRUE,TRUE,FALSE)
+b=c(TRUE,FALSE,FALSE)
+a&b
+
+a|b
+
+!a
+```
+
+## Conditional Statements
+
+if(condition){ #\<\<\<\< note the placement of brackets expression } -----------------
+
+if(condition){ expression 1 } else { #\<\<\<\< note the placement of brackets expression 2 }
+
+```{r}
+#find whether the given number is negative or not positive.
+
+x<-5
+
+if(x<0){
+  print("x is a negative number")
+} else {
+  print("x is either a positive number or zero")
+}
+
+
+```
+
+# 5. Iterative programming in R
+
+Most of the problems that we come across, iterative statements are necessary.
+
+For and while loops
+
+## WHILE loop
+
+while(test_expression){ statement }
+
+```{r}
+v<-"Hello"
+cnt<-2
+while(cnt<7){
+  print(v)
+  cnt<-cnt+1
+}
+```
+
+## FOR loop
+
+syntax
+
+for ( variable in start:end){ statement }
+
+```{r}
+for (i in 2:7){
+ # print(v)
+  cat(v,i, "\n")
+}
+print(1:5)
+```
+
+## looping over a list & vector
+
+```{r}
+#vector
+v<-c(1,2,"One", "True")
+for (i in v) 
+  { print(i)}
+
+```
+
+```{r}
+a<-1
+b<-1
+c=a+b
+print(c)
+for (i in 1:20){
+  
+  a<-b+c
+  b<-c+a
+  c<-a+b
+  
+  print(a)
+  print(b)
+  print(c)
+}
+```
+
+
+
+```{r}
+v<-c(1,2,"One", "True")
+cnt<-1
+while( cnt<length(v))
+{
+  print(v)
+  cnt<-cnt+1
+}
+```
+
+### loops for matrices
+
+```{r}
+y<-matrix(1:20, nrow=5,ncol=4)
+for( i in 1:nrow(y)){
+  for(j in 1:ncol(y)){
+    #print(y[i,j])
+    #y[i][j]
+    cat(y[i,j], "\n ")
+  }
+  cat("\n")
+}
+print(y)
+cat(y)
+```
+
+### loops for data frames
+
+```{r}
+patientID<-c(1,2,3,4)
+age<-c(25,34,28,52)
+diabetes<-c("Type1","Type2", "Type1", "Type1")
+status<-c("Poor","Improved", "Excellent", "Poor")
+patientdata<-data.frame(patientID,age,diabetes,status)
+for (i in names(patientdata)){
+  print(i)
+}
+
+for (i in names(patientdata)){
+  print(patientdata[i])
+}
+```
+
+###Loops for lists
+
+```{r}
+new<-list(one=c("11","11","11"), two=c("22","22","22"))
+for( i in names(new))
+{
+  print(new[i])
+}
+```
+
+```{r}
+l1<-list(a=1) #,2,3,4,5)
+for( i in l1){
+  print(i)
+}
+
+for( i in names(l1)){
+  print(i)
+  print(l1[i])
+}
+```
+
+| Function        | Type      | Default Values | Example Use            |
+|-----------------|-----------|----------------|------------------------|
+| `numeric(10)`   | double    | `0`            | decimals, real numbers |
+| `integer(10)`   | integer   | `0L`           | whole numbers, IDs     |
+| `character(10)` | character | `""`           | text, labels           |
+
+```{r}
+f<-numeric(10)
+print(f)
+f[12]<-2
+print(class(f))
+print(f)
+```
+
+```{r}
+# Write a R program to print the Fibonacci series
+len<-10
+#fibvals<-numeric(len)
+#fibvals[1]<-1
+fibvals<-numeric(len)
+fibvals[1]<-0
+fibvals[2]<-1
+for( i in 3:len) {
+  fibvals[i]<-fibvals[i-1]+fibvals[i-2]
+}
+fibvals
+```
+
+```{r}
+# write a R program to print the first 100 prime numbers
+is.prime1<-function(num){
+  if(num==2){
+    return (TRUE)
+  } 
+  
+  l1=2:(num-1)
+  cat("l1=",l1)
+  t=num%%l1
+  cat("\n t")
+  print(t)
+  cat("\n (t==0)")
+  print(t==0)
+  if( any(t==0)){
+    return(FALSE)
+  } else{
+    return(TRUE)
+  }
+}
+a=is.prime1(31)
+print(a)
+```
+
+```{r}
+is_prime <- function(num) {
+  if (num <= 1) return(FALSE)
+  if (num == 2) return(TRUE)
+  !any(num %% 2:(num-1) == 0)
+}
+
+# Test
+is_prime(7)   # TRUE
+is_prime(9)   # FALSE
+is_prime(2)   # TRUE
+is_prime(1)   # FALSE
+
+```
+
+```{r}
+num<-12
+flag<-0
+for(i in 2:(num-1)){
+  if(num%%i==0){
+    flag<-2
+  }
+}
+print(i)
+if(flag==0){
+print("Prime")
+} else{
+  print("not prime")
+}
+```
+
+Sum of numbers
+```{r}
+
+n<-5:10
+sum<-0
+for (i in n){
+  sum<-sum+i
+}
+print(sum)
+cat("size of n is ", length(n), "\n")
+sum<-0
+for ( i in 1:6){
+  sum<-sum+n[i]
+}
+print(sum)
+```
+
+find the GCD
+```{r}
+a=18
+b=20
+for(i in 1:20){
+  a=b%%a
+  b=a%%b
+  cat("a=",a,"\n")
+  cat("b=",b,"\n")
+  
+}
+```
+```{r}
+
+
+a=18
+b=20
+while (b != 0) {
+        temp <- b;
+        b <- a %% b;
+        a <- temp;
+    }
+print(a)
+```
+
+```{r}
+x <- c("Low", "Medium", "High", "Medium", "Low")
+just_factor<-factor(x)
+ordered_x <- factor(x, levels = c("Low", "Medium", "High"), ordered = TRUE)
+## TRY the above with FALSE also.
+print("ordered x is")
+print(ordered_x)
+print(as.integer(ordered_x))
+print("just factor is ")
+print(just_factor)
+print(as.integer(just_factor))
+print("-----------------------------------------")
+print(as.integer(ordered_x))
+print(max(ordered_x))
+
+print(max(ordered_x))
+
+```
+
