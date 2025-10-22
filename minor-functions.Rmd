@@ -1,0 +1,267 @@
+---
+title: "Functions"
+output:
+  html_document:
+    df_print: paged
+---
+
+function_name \<- function(arguments){ computations on the arguments task-specific code statements } \### User defined functions
+
+```{r}
+#Function Definition
+func_square<-function (x){
+  y<-x*x
+  print(y)
+}
+# function call
+func_square (5)
+```
+
+```{r}
+#Function Definition
+func_square<-function (x){
+  x*x
+  #print(y)
+}
+# function call
+y<-func_square (5)
+y
+```
+
+```{r}
+func_square<-function (x){
+  return (x*x)
+  #print(y)
+}
+# function call
+y<-func_square (5)
+y
+```
+
+```{r}
+f<-function(x){
+  g<-function(x){
+    #x<-10
+    print("inside g")
+    print(x)
+  }
+  g(5)
+  print("Inside of F")
+  print(x)
+}
+f(10)
+
+```
+
+```{r}
+a<-10
+outer_func<-function(){
+  inner_func<-function(){
+    a<<-30
+    print(a)
+  }
+  inner_func()
+  print(a)
+  
+}
+outer_func()
+print(a)
+```
+
+```{r}
+multi<-function(x,y=NULL){
+  if(!is.null(y)) x<-x*y
+  return(x)
+}
+multi(2)
+multi(2,3)
+```
+
+### Complex numbers
+
+```{r}
+c<-complex(real=2,imaginary = 5)
+f<-complex(real=4, imaginary = 7)
+g<-c+f
+print(g)
+is.complex(g)
+```
+
+```{r}
+c*f
+```
+
+### Quick Sort
+
+```{r}
+qsort<-function(value){
+  # computer till value =1
+  if(length(value)<=1){
+    return(value)
+  }
+  data<-value[1]
+  div<-value[-1]
+  
+  # re-arrange the values i.e less values than data values come before,
+  #and all greater values come after
+  v1<-div[div<data]
+  v2<-div[div>=data]
+  
+  v1<-qsort(v1) # do quick sort for v1 vaues
+  v2<-qsort(v2)
+  
+  return(c(v1,data,v2))
+  
+}
+
+qsort(c(10,3,44,77))
+```
+
+```{r}
+ins <- function (hdidx, tree, newval, inc){
+tr <- tree
+
+# check for room to add a new element
+tr$nxt <- tr$nxt + 1
+if (tr$nxt > nrow(tr$mat))
+tr$mat <- rbind(tr$mat, matrix(rep (NA, inc*3),nrow=inc,ncol=3))
+newidx <- tr$nxt
+# where we'11 put the new tree node
+tr$mat [newidx, 3] <- newval
+idx <- hdidx # marks our current place in the tree
+node <- tr$mat [idx,]
+nodeval <- node [3]
+while (TRUE) {
+# which direction to descend, left or right?
+if (newval <= nodeval) dir <-1 else dir <- 2
+# descend
+# null link?
+if (is.na(node [dir])) {
+tr$mat [idx, dir] <- newidx
+break
+}else {
+idx <- node [dir]
+node <- tr$mat [idx,]
+nodeval <- node [3]
+}
+}
+return(tr)
+}
+```
+
+### Recursion
+
+```{r}
+fact<-function(n){
+  f<-1
+  for ( i in 1:n){
+    f=f*i
+  }
+  return(f)
+}
+result<-fact(6)
+print(result)
+```
+
+```{r}
+rec_fact<-function(x){
+  if(x==0) {
+    return(1)
+  }else{
+    return(x*rec_fact(x-1))
+  }
+}
+rec_fact(6)
+```
+
+# mathematical functions in R
+
+```{r}
+abs(8/-22)
+abs(-4)
+```
+
+log function returns the natural logarithm (to base e) of a numeric value
+
+```{r}
+log(5)
+log(4)
+```
+
+```{r}
+log(10,10) # for base 10
+log(100,10)
+```
+
+exp function --- e raised to the power of numeric value
+
+```{r}
+exp(1.609)
+
+```
+
+log10 returns the logarithm of numeric value with base 10
+
+```{r}
+log10(5)
+```
+
+```{r}
+sqrt(64)
+```
+
+```{r}
+factorial(7)
+```
+
+```{r}
+round(46.26,0)
+round(4.26,1)
+round(9.3443884,4)
+```
+
+signif(numeric, digit)-- gives the first digit significcant integers of the numeric value
+
+```{r}
+signif(9.343434,4)
+signif(pi,3)
+```
+
+In R, `runif()` and `rnorm()` are functions used to generate random numbers from specific probability distributions.
+
+-   `runif()` (Uniform Distribution):
+
+    -   This function generates random numbers that are uniformly distributed within a specified range. In a uniform distribution, every value within the defined interval has an equal probability of being selected.
+
+    -   **Syntax:** `runif(n, min = 0, max = 1)`
+
+        -   `n`: The number of random values to generate.
+
+        -   `min`: The lower limit of the uniform distribution (default is 0).
+
+        -   `max`: The upper limit of the uniform distribution (default is 1).
+
+```{r}
+runif(5, min = 10, max = 20)
+runif(5)
+```
+
+`rnorm()` (Normal Distribution):
+
+-   This function generates random numbers that follow a normal (Gaussian) distribution. In
+    a normal distribution, values cluster around the mean, with the
+    probability of observing a value decreasing as it moves further from the
+    mean, according to the standard deviation.
+
+-   **Syntax:** `rnorm(n, mean = 0, sd = 1)`
+
+    -   `n`: The number of random values to generate.
+
+    -   `mean`: The mean (average) of the normal distribution (default is 0).
+
+    -   `sd`: The standard deviation of the normal distribution (default is 1).
+
+```{r}
+rnorm(5, mean = 50, sd = 10)
+rnorm(5)
+```
