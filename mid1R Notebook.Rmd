@@ -1,0 +1,242 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+illustrate summation, subtraction, multiplication and division operations on vectors
+
+```{r}
+# Define two vectors
+a <- c(10, 20, 30, 40)
+b <- c(2, 4, 6, 8)
+
+# Summation
+sum_vec <- a + b
+print(paste("Summation: ", toString(sum_vec)))
+
+# Subtraction
+sub_vec <- a - b
+print(paste("Subtraction: ", sub_vec))
+cat("sub",sub_vec)
+
+# Multiplication
+mul_vec <- a * b
+print(paste("Multiplication: ", toString(mul_vec)))
+
+# Division
+div_vec <- a / b
+print(paste("Division: ", toString(div_vec)))
+
+```
+
+```{r}
+# Create two matrices
+matrix1 <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, ncol = 3, byrow = TRUE)
+matrix2 <- matrix(c(7, 8, 9, 10, 11, 12), nrow = 3, ncol = 2, byrow = TRUE)
+
+# Display the matrices
+cat("Matrix 1:\n")
+print(matrix1)
+
+cat("\nMatrix 2:\n")
+print(matrix2)
+
+# Perform matrix multiplication
+result <- matrix1 %*% matrix2
+
+# Display the result
+cat("\nResult of Matrix Multiplication:\n")
+print(result)
+
+```
+
+### 1. **Matrix--Vector Multiplication**
+
+-   A matrix $A$ of size m×n can be multiplied with a vector $x$ of size $n\times 1$.
+
+-   The result is a new vector $y$ of size $m\times 1$.
+
+-   Formula:
+
+$y=A⋅x$
+
+where
+
+$$
+y_i = \sum_{j=1}^n A_{ij} \cdot x_j
+$$​
+
+```{r}
+A <- matrix(c(1,2,3,4,5,6), nrow=2, byrow=TRUE)
+x <- c(1,2,3)
+print(A)
+print(x)
+y <- A %*% x
+print(y)
+
+```
+
+### **Matrix--Vector Element-wise Multiplication**
+
+-   If vector length matches matrix dimension, element-wise multiplication occurs.
+
+-   Formula:
+
+$$C_{ij}=A_{ij}⋅x_j$$
+
+```{r}
+A <- matrix(c(1,2,3,4), nrow=2, byrow=TRUE)
+x <- c(10,20)
+
+result <- A * x   # vector recycled across rows
+print(result)
+
+```
+
+```{r}
+# Create some sample data
+data <- c(10, 12, 15, 18, 20, 22, 25, 28, 30, 32, 35)
+
+# Create a simple box plot
+boxplot(data)
+
+# Create a box plot with a title and axis labels
+boxplot(data, main = "My Box Plot", xlab = "Data Points", ylab = "Values")
+
+# Create box plots for different groups using a formula
+# Example: comparing 'value' based on 'group'
+ data_frame <- data.frame(value = c(1:10, 15:24), group = rep(c("A", "B"), each = 10))
+ boxplot(value ~ group, data = data_frame, main = "Box Plot by Group")
+```
+
+```{r}
+#data <- rnorm(100)
+qqnorm(data)
+
+```
+
+```{r}
+hist(data,breaks=3)
+hist(data, breaks=c(0,5,10,15,20,25,30,35))
+```
+
+```{r}
+# Sample data
+x <- c(1, 2, 3, 4, 5)
+y <- c(2, 4, 6, 8, 10)
+
+# Create a scatter plot
+plot(x, y, 
+     main = "Scatter Plot in Base R",  # Title of the plot
+     xlab = "X-axis Label",            # Label for the X-axis
+     ylab = "Y-axis Label",            # Label for the Y-axis
+     col = "blue",                     # Color of the points
+     pch = 2)                          # Shape of the points
+
+```
+#subsetting
+
+```{r}
+mixed<-c(1,'a')
+mixed
+```
+
+
+
+```{r}
+remain<-c(11,12,11,13)
+ remain
+ 
+ suits<-c("Spades", "hearts", "diamonds", "clubs")
+names(remain) <-suits
+remain
+
+```
+
+```{r}
+remain1<-c(Spades=11,hearts=12,diamonds=11,clubs=13)
+remain1
+
+```
+```{r}
+remain[1]
+
+remain['Spades']
+
+```
+
+```{r}
+remain2<-remain[c(1,4)]
+remain2
+
+```
+
+```{r}
+remain[c("clubs", "spades")]
+
+
+
+
+
+
+
+```
+
+```{r}
+remain[c(FALSE,TRUE,FALSE,TRUE)]
+
+```
+
+
+```{r}  
+remain[-1]
+
+```
+
+```{r}
+sel_vec<-remain==11
+print(sel_vec)
+remain[sel_vec]
+
+
+
+```
+
+
+
+```{r}
+remain[c(TRUE,FALSE)]
+```
+#Matrix
+
+```{r}
+m=matrix(1:6,nrow=2)
+m
+```
+
+
+```{r}
+
+m[,3]
+
+m[1,]
+
+m[1,1]
+
+
+```
+
+
+```{r}
+m
+m[2,c(2,3)]
+
+```
+
+```{r}
+a <- c(10, 20, 30, 40,50)
+summary(a)
+```
+
