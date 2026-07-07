@@ -9,7 +9,7 @@ illustrate summation, subtraction, multiplication and division operations on vec
 
 ```{r}
 # Define two vectors
-a <- c(10, 20, 30, 40)
+a <- c(10, 20, 30, 460)
 b <- c(2, 4, 6, 8)
 
 # Summation
